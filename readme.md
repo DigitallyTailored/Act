@@ -148,3 +148,7 @@ Conclusion
 ----------
 
 Act is a lightweight, simple microframework that makes it easy to build complex user interfaces without compromising on features. If you're looking for a framework that is easy to learn, flexible, and powerful, then Act is the perfect choice for you. Try it out today and see how it can improve your web development experience!Welcome to Act!
+
+[<img align="left" alt="Luke Heyburn | Twitter" width="42px" src="https://cdn.cdnlogo.com/logos/t/96/twitter-icon.svg" />](https://twitter.com/Luke_Aaron)
+[<img align="left" alt="Luke Heyburn | LinkedIn" width="42px" src="https://cdn.cdnlogo.com/logos/l/78/linkedin-icon.svg" />](https://www.linkedin.com/in/lukeheyburn/)
+
