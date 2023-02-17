@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Example</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="../../dist/act.js"></script>
+
+
+<script>
+
+    //load view modules
+    let modules = []
+    modules.push([`button`, `/demo/basic/button.mjs`])
+    modules.push([`button2`, `/demo/basic/button2.mjs`])
+    modules.push([`button3`, `/demo/basic/button3.mjs`])
+    modules.push([`clicker`, `/demo/basic/clicker.mjs`])
+
+    a.load(modules).then(() => {
+        a.init({ count: 10 })
+        //sets the default target for a.render to use
+        a.target = document.getElementById('container')
+
+        a.render([
+            a.view('button3'),
+            a.view('button3'),
+            ]
+        )
+        /*
+        a.render(
+            a.view('clicker')
+        )
+
+         */
+/*
+                a.render(
+                    [
+                        a.view('button', {
+                            body:
+
+                                `this is fine`
+                        }),
+                        `this is a string`,
+                        a.view('button', {
+                        body:
+                            `this is fine`
+                     }),
+                    ]
+                )
+*/
+
+        a.listen(state => {
+            console.log('state')
+            console.log(state)
+        })
+
+
+        /*
+                a.render([
+                    a.view('button', {
+                        body:
+                            `this is fine`,
+                        on: [{click: (event,v) => {console.log(v)}}]
+                    }),
+                    a.view('button2', {
+                        body:
+                            `HOVER OVER ME`,
+                        on: [
+                            {click: (event,v) => {alert(`1`)}},
+                            {click: (event,v) => {alert(`2`)}},
+                        ]
+                    }),
+                    a.view('button', {
+                        body:
+                            `this is fine`
+                    }),
+                    a.view('button', {
+                        body: [`blah blah blah`,
+                            a.view('button2', {
+                                body:
+                                    `this is fine`
+                            })
+                            ]
+                    })
+                    ]
+                )
+*/
+
+
+        /*
+        a.render(`this is fine`)
+
+        a.render(
+            a.view('button', {
+                body:
+                    `this is fine`
+            })
+        )
+
+        a.render([
+            a.view('button', {
+                body:
+                    `this is fine`
+            }),
+            a.view('button', {
+                body:
+                    `this is fine too`
+            }),
+        ])
+
+
+        a.render([
+            a.view('button', {
+                body:
+                    a.view('button', {
+                        body:
+                            `also fine`
+                    })
+            }),
+        ])
+
+*/
+
+        /*
+        a.render([
+            `alright calm down`,
+            a.view('button', {
+                body:
+                    `button 1`
+            }),
+            a.view('button2', {
+                body:
+                    `button 2`
+            }),
+            a.view('button', {
+                body:
+                    [`button 1`,
+                    a.view('button2', {
+                        body:
+                            `button 2`
+                    })
+                    ]
+            }),
+            a.view('button', {
+                body:[
+                    a.view('button', {
+                        body:
+                            `button 1`
+                    }),
+                    `button 1`
+                ]
+            }),
+        ])
+
+         */
+
+
+    })
+</script>
+</body>
+</html>
