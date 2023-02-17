@@ -142,13 +142,11 @@ Module View Methods: Modules can be of any element type for accessibility (no `d
 -   `v.watch(name, callback)`: Will output the specified `callback` when the given listener `name` is updated. Used for automatically updating HTML with values as they change. This method takes two parameters: `name`, which specifies the name of the listener to watch, and `callback`, which is a function that will be called every time the specified listener is updated.
 
 
-
-
 Conclusion
 ----------
 
 Act is a lightweight, simple microframework that makes it easy to build complex user interfaces without compromising on features. If you're looking for a framework that is easy to learn, flexible, and powerful, then Act is the perfect choice for you. Try it out today and see how it can improve your web development experience!Welcome to Act!
 
-[<img align="left" alt="Luke Heyburn | Twitter" width="42px" src="https://cdn.cdnlogo.com/logos/t/96/twitter-icon.svg" />](https://twitter.com/Luke_Aaron)
-[<img align="left" alt="Luke Heyburn | LinkedIn" width="42px" src="https://cdn.cdnlogo.com/logos/l/78/linkedin-icon.svg" />](https://www.linkedin.com/in/lukeheyburn/)
-
+[<img alt="Luke Heyburn | Twitter" width="42px" src="https://cdn.cdnlogo.com/logos/t/96/twitter-icon.svg" />](https://twitter.com/Luke_Aaron)
+[<img alt="Luke Heyburn | LinkedIn" width="42px" src="https://cdn.cdnlogo.com/logos/l/78/linkedin-icon.svg" />](https://www.linkedin.com/in/lukeheyburn/)
+[<img alt="Digitally Tailored" width="42px" src="https://user-images.githubusercontent.com/13086157/219529099-c3669a02-ce91-4090-b9f9-8320deffa50a.png" />](https://digitallytailored.com/)
