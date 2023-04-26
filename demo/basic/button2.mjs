@@ -1,4 +1,7 @@
 export default {
+    values: v => ({
+        body: 'hi',
+    }),
     style: v => (`
         button {
             font-size: 20px;

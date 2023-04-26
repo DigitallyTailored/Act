@@ -14,104 +14,111 @@ export default {
     },
 
     //todo render should take an array of elements
-    render(elements, target = false, replace = true, append = true) { //insert given view into target
+    render(elements, target = false, replace = true, append = true) {
         target = target || this.target;
 
-
         if (replace) {
-            while (target?.firstChild) {
-                target.removeChild(target.firstChild);
-            }
+            this.clearTarget(target);
         }
 
-        //for simplicity, we process a single element as an array item; the same as multiple elements
         if (!Array.isArray(elements)) {
             elements = [elements];
         }
 
-        let elementQueue = []
-        //iterate through each element and add it to the target
+        let elementQueue = this.processElements(elements, target, append);
+        this.runScriptsAndCreateEventListeners(elementQueue);
+    },
+
+    clearTarget(target) {
+        while (target?.firstChild) {
+            target.removeChild(target.firstChild);
+        }
+    },
+
+    processElements(elements, target, append) {
+        let elementQueue = [];
+
         elements.forEach(element => {
-            //allow for directly adding an element via html string, otherwise treat as a html element
             if (typeof element === 'string' || typeof element === 'number') {
                 target.insertAdjacentHTML((append ? 'beforeend' : 'afterbegin'), element)
             } else {
-                target.insertAdjacentElement((append ? 'beforeend' : 'afterbegin'), element)
+                target.insertAdjacentElement((append ? 'beforeend' : 'afterbegin'), element);
 
-                let values = element.act.values() //all values (user + .act)
-                let view = this._views[values.act.viewName] //original view module
+                let values = element.act.values();
+                let view = this._views[values.act.viewName];
 
-                values.act.parent = () => (target)
+                values.act.parent = () => (target);
 
-                //set style
-                if (view.style) {
-                    //check if this style is already set within this scope of the target
-                    //if(!values.act.parent().querySelector(`:scope > style[data-act_style="${values.act.viewName}"]`)){
+                this.setStyle(view, values);
 
-                    if (!this.target.querySelector(`style[data-act_style="${values.act.viewName}"]`)) {
-                        const styleElement = document.createElement('style')
-                        styleElement.dataset.act_style = values.act.viewName
+                elementQueue.push(element);
 
-                        let stylesheet = view.style(values)
-
-
-                        stylesheet = stylesheet.replace(/([\w\d.#]+)(\s*\{)/g, (match, selector, brace) => {
-
-                            //return `${selector}${values.act.view}, ${values.act.view} ${selector}${brace}\nall: initial;\n`;
-                            return `${selector}${values.act.style} ${brace}\n`;
-                        });
-
-                        styleElement.innerHTML = stylesheet
-                        this.target.insertAdjacentElement('afterbegin', styleElement)
-                    }
-                }
-
-                //queue elements in order added to fire scripts after render is complete
-                elementQueue.push(element)
-
-                let watches = element.querySelectorAll('act-watch')
-                watches.forEach(watch => {
-                    const watcher = values.act._watchers[watch.dataset.act_watch_key]
-                    debugger
-                    act.listen( watcher.name, state => {
-                        watch.innerText = watcher.event(values);
-                    })
-                    watch.innerText = watcher.event(values);
-                })
+                this.processWatches(element, values);
 
                 if (values?.body) {
-                    this.render(values.body, element.querySelector('act-body'))
+                    this.render(values.body, element.querySelector('act-body'));
                 }
-
             }
+        });
 
-        })
+        return elementQueue;
+    },
 
-        //create event listeners and run the scripts for each element in the queue
+    setStyle(view, values) {
+        if (view.style) {
+            if (!this.target.querySelector(`style[data-act_style="${values.act.viewName}"]`)) {
+                const styleElement = document.createElement('style');
+                styleElement.dataset.act_style = values.act.viewName;
+
+                let stylesheet = view.style(values);
+
+                stylesheet = stylesheet.replace(/([\w\d.#]+)(\s*\{)/g, (match, selector, brace) => {
+                    return `${selector}${values.act.style} ${brace}\n`;
+                });
+
+                styleElement.innerHTML = stylesheet;
+                this.target.insertAdjacentElement('afterbegin', styleElement);
+            }
+        }
+    },
+
+    processWatches(element, values) {
+        let watches = element.querySelectorAll('act-watch');
+        watches.forEach(watch => {
+            const watcher = values.act._watchers[watch.dataset.act_watch_key];
+            act.listen(watcher.name, state => {
+                watch.innerText = watcher.event(values);
+            });
+            watch.innerText = watcher.event(values);
+        });
+    },
+
+    runScriptsAndCreateEventListeners(elementQueue) {
         for (let i = 0; i < elementQueue.length; i++) {
-            const element = elementQueue[i]
-            const values = element.act.values()
-            const view = this._views[values.act.viewName]
+            const element = elementQueue[i];
+            const values = element.act.values();
+            const view = this._views[values.act.viewName];
 
-            if (view?.script) view.script(values)
+            if (view?.script) view.script(values);
 
             if (values?.on) {
-                let events = values.on;
-                if (!Array.isArray(events)) {
-                    events = [events];
-                }
-                //loop through events in the `events` array
-                for (let i = 0; i < events.length; i++) {
-                    const event = Object.keys(events[i])[0];
-                    const callback = events[i][event];
-                    element.addEventListener(event, (event) => {
-                        callback(event, values);
-                    });
-                }
+                this.createEventListeners(element, values);
             }
-
         }
+    },
 
+    createEventListeners(element, values) {
+        let events = values.on;
+        if (!Array.isArray(events)) {
+            events = [events];
+        }
+        for (let i = 0; i < events.length; i++) {
+            const event = Object.keys(events[i])[0];
+            const callback = events[i][event];
+            element.addEventListener(event, (event) => {
+                callback(event, values);
+            });
+        }
     },
 
     //todo this should probably return the entire element and render handles what do with it (view/styling/script
