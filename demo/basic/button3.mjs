@@ -4,5 +4,5 @@ export default {
             font-size: 10px;
         }
      `),
-    view: v => (`<button>${v.watch('count', v=> {return a.get().count} )}</button>`)
+    view: v => (`<button>${v.watch('count', v=> {return act.get().count} )}</button>`)
 }

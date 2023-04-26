@@ -6,7 +6,7 @@ export default {
      `),
     view: v => (`<button>${v.body}</button>`),
     script: v => {
-        v.act.element().addEventListener('click', (e) => {
+        v.act.element.addEventListener('click', (e) => {
             console.log(v)
         })
     }

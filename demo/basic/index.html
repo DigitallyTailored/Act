@@ -8,7 +8,7 @@
 
 <div id="container"></div>
 
-<script src="../../dist/act.js"></script>
+<script src="../../src/bundle.js"></script>
 
 
 <script>
@@ -20,32 +20,32 @@
     modules.push([`button3`, `/demo/basic/button3.mjs`])
     modules.push([`clicker`, `/demo/basic/clicker.mjs`])
 
-    a.load(modules).then(() => {
-        a.init({ count: 10 })
-        //sets the default target for a.render to use
-        a.target = document.getElementById('container')
+    act.load(modules).then(() => {
+        act.init({ count: 10 })
+        //sets the default target for act.render to use
+        act.target = document.getElementById('container')
 
-        a.render([
-            a.view('button3'),
-            a.view('button3'),
+        act.render([
+            act.view('button3'),
+            act.view('button3'),
             ]
         )
         /*
-        a.render(
-            a.view('clicker')
+        act.render(
+            act.view('clicker')
         )
 
          */
 /*
-                a.render(
+                act.render(
                     [
-                        a.view('button', {
+                        act.view('button', {
                             body:
 
                                 `this is fine`
                         }),
                         `this is a string`,
-                        a.view('button', {
+                        act.view('button', {
                         body:
                             `this is fine`
                      }),
@@ -53,20 +53,20 @@
                 )
 */
 
-        a.listen(state => {
+        act.listen(state => {
             console.log('state')
             console.log(state)
         })
 
 
         /*
-                a.render([
-                    a.view('button', {
+                act.render([
+                    act.view('button', {
                         body:
                             `this is fine`,
                         on: [{click: (event,v) => {console.log(v)}}]
                     }),
-                    a.view('button2', {
+                    act.view('button2', {
                         body:
                             `HOVER OVER ME`,
                         on: [
@@ -74,13 +74,13 @@
                             {click: (event,v) => {alert(`2`)}},
                         ]
                     }),
-                    a.view('button', {
+                    act.view('button', {
                         body:
                             `this is fine`
                     }),
-                    a.view('button', {
+                    act.view('button', {
                         body: [`blah blah blah`,
-                            a.view('button2', {
+                            act.view('button2', {
                                 body:
                                     `this is fine`
                             })
@@ -92,31 +92,31 @@
 
 
         /*
-        a.render(`this is fine`)
+        act.render(`this is fine`)
 
-        a.render(
-            a.view('button', {
+        act.render(
+            act.view('button', {
                 body:
                     `this is fine`
             })
         )
 
-        a.render([
-            a.view('button', {
+        act.render([
+            act.view('button', {
                 body:
                     `this is fine`
             }),
-            a.view('button', {
+            act.view('button', {
                 body:
                     `this is fine too`
             }),
         ])
 
 
-        a.render([
-            a.view('button', {
+        act.render([
+            act.view('button', {
                 body:
-                    a.view('button', {
+                    act.view('button', {
                         body:
                             `also fine`
                     })
@@ -126,28 +126,28 @@
 */
 
         /*
-        a.render([
+        act.render([
             `alright calm down`,
-            a.view('button', {
+            act.view('button', {
                 body:
                     `button 1`
             }),
-            a.view('button2', {
+            act.view('button2', {
                 body:
                     `button 2`
             }),
-            a.view('button', {
+            act.view('button', {
                 body:
                     [`button 1`,
-                    a.view('button2', {
+                    act.view('button2', {
                         body:
                             `button 2`
                     })
                     ]
             }),
-            a.view('button', {
+            act.view('button', {
                 body:[
-                    a.view('button', {
+                    act.view('button', {
                         body:
                             `button 1`
                     }),

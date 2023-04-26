@@ -3,34 +3,35 @@ export default {
         button { color: red;}
         span {color: blue;}
      `),
-    view: v => (`<button>${v.body} <span>!!!</span></button>`),
+    view: v => (`<button>${v.body} <span>!!!</span></button><act-header/> <act-content/>`),
     script: v => {
 
+        //act.render(act.view("clicker"), v.act.reference('header'))
 
-        a.init({ count: 10 });
-        a.init({ tester: 0 });
+        act.init({ count: 10 });
+        act.init({ tester: 0 });
 
-        v.act.element().addEventListener('click', (e) => {
-            a.set({ count: a.get().count + 1 });
+        v.act.element.addEventListener('click', (e) => {
+            act.set({ count: act.get().count + 1 });
         })
 
         /*
-        a.listen( state => {
+        act.listen( state => {
             v.act.find('span').innerText = state.count;
         })
          */
-        a.listen( 'count', state => {
+        act.listen( 'count', state => {
             v.act.find('span').innerText = state.count;
         })
 
-        a.listen( 'tester', state => {
+        act.listen( 'tester', state => {
             v.act.find('span').innerText = 'ooh';
         })
 
 
 
         /*
-        v.act.element().addEventListener('click', (e) => {
+        v.act.element.addEventListener('click', (e) => {
             v.act.findViews('button2')?.forEach((e) => {
                 console.log(e.act.values())
             })

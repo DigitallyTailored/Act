@@ -72,7 +72,8 @@ export default {
                 let watches = element.querySelectorAll('act-watch')
                 watches.forEach(watch => {
                     const watcher = values.act._watchers[watch.dataset.act_watch_key]
-                    a.listen( watcher.name, state => {
+                    debugger
+                    act.listen( watcher.name, state => {
                         watch.innerText = watcher.event(values);
                     })
                     watch.innerText = watcher.event(values);
@@ -172,7 +173,9 @@ export default {
         //make element directly available to view from values and vice versa
         element.act = {}
         element.act.values = () => (values)
-        values.act.element = () => (element)
+        //values.act.element = () => (element)
+        values.act.element = element
+        values.act.reference = (reference) => (element.act.find('act-'+reference))
 
 
         element.classList.add(values.act._uid)

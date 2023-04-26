@@ -1,12 +1,10 @@
 import viewsFactory from "./viewsFactory.mjs";
 import state from "./state.mjs";
 
-window.a = {
-    test: () => {console.log('test 4')},
+window.act = {
+    test: () => {console.log('test 5')},
     ...viewsFactory,
     ...state,
 }
 
-//todo add styling
-//todo add `all:initial` css rule to view by default
-//todo run script after inserting view(s) - check how this works for nesting..
+window.a = window.act;

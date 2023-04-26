@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "parcel src/index.mjs --out-file dist/act.js",
-    "watch": "parcel watch src/index.mjs --out-file dist/act.js",
-    "public": "parcel build src/index.mjs --out-file dist/act.min.js --public-url . --no-source-maps"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.16"
   }
 }

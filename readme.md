@@ -33,17 +33,17 @@ Documentation
 
 Act is a simple, lightweight JavaScript microframework designed to be easy to use without sacrificing features. Here are some basic commands to help you get started:
 
-Loading View Modules: First, load your view modules using `a.load()`. Each module should be in the format of `[name, path]`. Once all modules are loaded, you can use the `a.render()` method to display them. Here is an example:
+Loading View Modules: First, load your view modules using `act.load()`. Each module should be in the format of `[name, path]`. Once all modules are loaded, you can use the `act.render()` method to display them. Here is an example:
 
 
 ```javascript
 let modules = []
 modules.push([`button`, `/demo/basic/button.mjs`])
 
-a.load(modules).then(() => {
+act.load(modules).then(() => {
     //modules are loaded and Act is ready to run!
-    a.target = document.getElementById('container')
-    a.render(a.view('button'))
+    act.target = document.getElementById('container')
+    act.render(act.view('button'))
 })
 ```
 
@@ -53,26 +53,26 @@ Module Format: Each module holds a reusable self-contained block of code that en
 
 ```javascript
 export default {
-    values: v => {}, // default values available from each property
-    style: v => {``}, // styles unique to each module
-    view: v => {``}, // the HTML to show for the component. The route element is respected in the HTML output
-    script: v => {console.log('hello')} // any scripts to run, events to set or listeners to prepare when the component is added
+    values: v => ({greeting:"hello world"}), // `v` object with default values for each property below
+    style: v => `button {color:blue}`, // unique module styles
+    view: v => `<button></button>`, // the HTML to show for the view. The output route element is directly accessible through `v.act.elmement`
+    script: v => {v.act.element.innerText = v.greeting} // any scripts to run, events to set or listeners to prepare when the component is added
 }
 ```
 
 Global Methods: Here are some global methods you can use with Act:
 
--   `a.load(modules).then(callback)`: loads an array of modules to use as views. Once all modules are loaded, the callback will be run.
--   `a.target`: used to specify the default target element for `a.render()` to output to.
--   `a.render([target], elements)`: optional target. Array of elements to embed from `a.view()`. Can also accept a single string or element.
--   `a.view(name, [values])`: returns an element to be rendered. Can optionally specify default values.
+-   `act.load(modules).then(callback)`: loads an array of modules to use as views. Once all modules are loaded, the callback will be run.
+-   `act.target`: used to specify the default target element for `act.render()` to output to.
+-   `act.render([target], elements)`: optional target. Array of elements to embed from `act.view()`. Can also accept a single string or element.
+-   `act.view(name, [values])`: returns an element to be rendered. Can optionally specify default values.
 
-State Methods: Act provides simple state management available within modules and directly embedding into HTML:
+State Methods: Act also provides simple state management available within modules and with direct embedding into HTML:
 
--   `a.listen([state], callback)`: optionally specify the specific state property to watch. The callback is called each time it is updated.
--   `a.init({})`: used to set the state without updating any listeners. Best to use for initial load or large granular updates.
--   `a.set({})`: used to update the state with the given object.
--   `a.get()`: returns the entire state object to retrieve values. Call within `a.set()` to update existing state values.
+-   `act.listen([state], callback)`: optionally specify the specific state property to watch. The callback is called each time it is updated.
+-   `act.init({})`: used to set the state without updating any listeners. Best to use for initial load or large granular updates.
+-   `act.set({})`: used to update the state with the given object.
+-   `act.get()`: returns the entire state object to retrieve values. Call within `act.set()` to update existing state values.
 
 
 _Example: This module uses the `v.watch()` method to display the current count value from the state object, and sets up a click event listener on the button element to update the count in the state object when the button is clicked. When any button using this module is clicked, they will all update automatically due to the listener being set for each_
@@ -82,10 +82,10 @@ export default {
   values: v => ({
     count: v.count || 0
   }),
-  view: v => (`<button>${v.watch('count', v => a.get().count)} clicks</button>`),
+  view: v => (`<button>${v.watch('count', v => act.get().count)} clicks</button>`),
   script: v => {
-    v.act.element().addEventListener('click', () => {
-      a.set({ count: a.get().count + 1 })
+    v.act.element.addEventListener('click', () => {
+      act.set({ count: act.get().count + 1 })
     })
   }
 }
@@ -93,7 +93,7 @@ export default {
 
 Module Script Methods: Each module script is given powerful helpers and direct references to themselves and their children:
 
--   `v.act.element()`: returns the HTML element for the module. Can be used to attach listeners, etc.
+-   `v.act.element`: returns the HTML element for the module. Can be used to attach listeners, etc.
 -   `v.act.find(query)`: performs a `querySelector()` within the scope of the current module.
 -   `v.act.findAll(query)`: performs a `querySelectorAll()` within the scope of the current module.
 -   `v.act.findViews([name])`: returns all child views under the current module. You can optionally set the name to get specific types of views.
@@ -110,7 +110,7 @@ export default {
     </div>
   `,
   script: v => {
-    const parent = v.act.element()
+    const parent = v.act.element
     const child = v.act.find('.child')
     const children = v.act.findAll('*')
     const views = v.act.findViews()
@@ -124,7 +124,7 @@ export default {
 
 ```
 
-_This example module defines a simple view with a parent element, a child element, and some nested elements. In the script section, it uses the `v.act` methods to access the HTML elements within the module. `v.act.element()` returns the top-level HTML element of the module, which in this case is the `<div>` element with class "parent". `v.act.find(query)` and `v.act.findAll(query)` are used to search for specific elements within the module. `v.act.find('.child')` returns the `<div>` element with class "child", while `v.act.findAll('*')` returns an array of all child elements. Finally, `v.act.findViews([name])` is used to access the child views within the module. With no argument specified, it returns all child views. This particular module has no child views added_
+_This example module defines a simple view with a parent element, a child element, and some nested elements. In the script section, it uses the `v.act` methods to access the HTML elements within the module. `v.act.element` returns the top-level HTML element of the module, which in this case is the `<div>` element with class "parent". `v.act.find(query)` and `v.act.findAll(query)` are used to search for specific elements within the module. `v.act.find('.child')` returns the `<div>` element with class "child", while `v.act.findAll('*')` returns an array of all child elements. Finally, `v.act.findViews([name])` is used to access the child views within the module. With no argument specified, it returns all child views. This particular module has no child views added_
 
 
 
