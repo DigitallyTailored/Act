@@ -1,6 +1,10 @@
 Act - A Simple, Lightweight JavaScript Microframework
 =====================================================
 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/13086157/219523286-2c28084a-6a25-41e4-ad67-d49dc66dba54.png" width="200" />
+</div>
+
 Act is a simple, lightweight microframework that aims to be the easiest and simplest framework out there without compromising on features. It is built and used entirely using vanilla JS, HTML and CSS, so there is very little overhead to learn on top of web development basics.
 
 The framework is also designed to be embedded easily into an existing project and can be used to build reusable components that can be used across multiple pages or applications.
@@ -138,9 +142,11 @@ Module View Methods: Modules can be of any element type for accessibility (no `d
 -   `v.watch(name, callback)`: Will output the specified `callback` when the given listener `name` is updated. Used for automatically updating HTML with values as they change. This method takes two parameters: `name`, which specifies the name of the listener to watch, and `callback`, which is a function that will be called every time the specified listener is updated.
 
 
-
-
 Conclusion
 ----------
 
 Act is a lightweight, simple microframework that makes it easy to build complex user interfaces without compromising on features. If you're looking for a framework that is easy to learn, flexible, and powerful, then Act is the perfect choice for you. Try it out today and see how it can improve your web development experience!Welcome to Act!
+
+[<img alt="Luke Heyburn | Twitter" width="42px" src="https://cdn.cdnlogo.com/logos/t/96/twitter-icon.svg" />](https://twitter.com/Luke_Aaron)
+[<img alt="Luke Heyburn | LinkedIn" width="42px" src="https://cdn.cdnlogo.com/logos/l/78/linkedin-icon.svg" />](https://www.linkedin.com/in/lukeheyburn/)
+[<img alt="Digitally Tailored" width="42px" src="https://user-images.githubusercontent.com/13086157/219529099-c3669a02-ce91-4090-b9f9-8320deffa50a.png" />](https://digitallytailored.com/)
