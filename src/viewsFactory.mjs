@@ -4,13 +4,18 @@ export default {
     _views: {},
     target: false,
 
-    load(moduleNames) {
+    load(modules) {
+        Object.keys(modules).forEach(moduleName => {
+            this._views[moduleName] = modules[moduleName]
+        })
+        /*
         const loadModules = moduleNames.map(module => import(module[1]).then(
             imported => {
                 this._views[module[0]] = imported.default
             }
         ));
         return Promise.all(loadModules);
+         */
     },
 
     //todo render should take an array of elements

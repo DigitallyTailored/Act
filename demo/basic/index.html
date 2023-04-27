@@ -12,157 +12,151 @@
 
 <!--add a module script -->
 <script type="module">
-
+    import button from '/demo/basic/button3.mjs'
+    import draw from '/demo/basic/drawOnImage.mjs'
     //load view modules - we do it this way so the modules can be accessed globally and we can reuse the custom references
-    let imports = [
-        [`button`, `/demo/basic/button.mjs`],
-        [`button2`, `/demo/basic/button2.mjs`],
-        [`button3`, `/demo/basic/button3.mjs`],
-        [`clicker`, `/demo/basic/clicker.mjs`],
-        [`draw`, `/demo/basic/drawOnImage.mjs`]
-    ]
+    act.load({button, draw})
 
-    act.load(imports).then(() => {
-        act.init({count: 10})
-        //sets the default target for act.render to use
-        act.target = document.getElementById('container')
 
-        act.render([
-                act.view('draw', {imageUrl: "https://placehold.co/600x400"}),
-                act.view('draw', {imageUrl: "https://picsum.photos/600/400"}),
-                //act.view('button2'),
-            ]
-        )
-        /*
-        act.render(
-            act.view('clicker')
-        )
+    act.init({count: 10})
+    //sets the default target for act.render to use
+    act.target = document.getElementById('container')
 
-         */
-        /*
-                        act.render(
-                            [
-                                act.view('button', {
-                                    body:
+    act.render([
+            act.view('draw', {imageUrl: "https://placehold.co/600x400"}),
+            act.view('draw', {imageUrl: "https://picsum.photos/600/400"}),
+            //act.view('button2'),
+        ]
+    )
+    /*
+    act.render(
+        act.view('clicker')
+    )
 
-                                        `this is fine`
-                                }),
-                                `this is a string`,
-                                act.view('button', {
+     */
+    /*
+                    act.render(
+                        [
+                            act.view('button', {
                                 body:
+
                                     `this is fine`
-                             }),
-                            ]
-                        )
-        */
-
-        act.listen(state => {
-            console.log('state')
-            console.log(state)
-        })
-
-
-        /*
-                act.render([
-                    act.view('button', {
-                        body:
-                            `this is fine`,
-                        on: [{click: (event,v) => {console.log(v)}}]
-                    }),
-                    act.view('button2', {
-                        body:
-                            `HOVER OVER ME`,
-                        on: [
-                            {click: (event,v) => {alert(`1`)}},
-                            {click: (event,v) => {alert(`2`)}},
+                            }),
+                            `this is a string`,
+                            act.view('button', {
+                            body:
+                                `this is fine`
+                         }),
                         ]
-                    }),
-                    act.view('button', {
-                        body:
-                            `this is fine`
-                    }),
-                    act.view('button', {
-                        body: [`blah blah blah`,
-                            act.view('button2', {
-                                body:
-                                    `this is fine`
-                            })
-                            ]
-                    })
-                    ]
-                )
-*/
+                    )
+    */
 
-
-        /*
-        act.render(`this is fine`)
-
-        act.render(
-            act.view('button', {
-                body:
-                    `this is fine`
-            })
-        )
-
-        act.render([
-            act.view('button', {
-                body:
-                    `this is fine`
-            }),
-            act.view('button', {
-                body:
-                    `this is fine too`
-            }),
-        ])
-
-
-        act.render([
-            act.view('button', {
-                body:
-                    act.view('button', {
-                        body:
-                            `also fine`
-                    })
-            }),
-        ])
-
-*/
-
-        /*
-        act.render([
-            `alright calm down`,
-            act.view('button', {
-                body:
-                    `button 1`
-            }),
-            act.view('button2', {
-                body:
-                    `button 2`
-            }),
-            act.view('button', {
-                body:
-                    [`button 1`,
-                    act.view('button2', {
-                        body:
-                            `button 2`
-                    })
-                    ]
-            }),
-            act.view('button', {
-                body:[
-                    act.view('button', {
-                        body:
-                            `button 1`
-                    }),
-                    `button 1`
-                ]
-            }),
-        ])
-
-         */
-
-
+    act.listen(state => {
+        console.log('state')
+        console.log(state)
     })
+
+
+    /*
+            act.render([
+                act.view('button', {
+                    body:
+                        `this is fine`,
+                    on: [{click: (event,v) => {console.log(v)}}]
+                }),
+                act.view('button2', {
+                    body:
+                        `HOVER OVER ME`,
+                    on: [
+                        {click: (event,v) => {alert(`1`)}},
+                        {click: (event,v) => {alert(`2`)}},
+                    ]
+                }),
+                act.view('button', {
+                    body:
+                        `this is fine`
+                }),
+                act.view('button', {
+                    body: [`blah blah blah`,
+                        act.view('button2', {
+                            body:
+                                `this is fine`
+                        })
+                        ]
+                })
+                ]
+            )
+*/
+
+
+    /*
+    act.render(`this is fine`)
+
+    act.render(
+        act.view('button', {
+            body:
+                `this is fine`
+        })
+    )
+
+    act.render([
+        act.view('button', {
+            body:
+                `this is fine`
+        }),
+        act.view('button', {
+            body:
+                `this is fine too`
+        }),
+    ])
+
+
+    act.render([
+        act.view('button', {
+            body:
+                act.view('button', {
+                    body:
+                        `also fine`
+                })
+        }),
+    ])
+
+*/
+
+    /*
+    act.render([
+        `alright calm down`,
+        act.view('button', {
+            body:
+                `button 1`
+        }),
+        act.view('button2', {
+            body:
+                `button 2`
+        }),
+        act.view('button', {
+            body:
+                [`button 1`,
+                act.view('button2', {
+                    body:
+                        `button 2`
+                })
+                ]
+        }),
+        act.view('button', {
+            body:[
+                act.view('button', {
+                    body:
+                        `button 1`
+                }),
+                `button 1`
+            ]
+        }),
+    ])
+
+     */
+
+
 </script>
 </body>
 </html>

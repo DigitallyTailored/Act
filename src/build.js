@@ -4,7 +4,7 @@ const esbuild = require('esbuild');
 
 esbuild
     .build({
-        entryPoints: ['index.mjs'],
+        entryPoints: ['./index.mjs'],
         outfile: 'bundle.js',
         bundle: true,
         format: 'iife',
