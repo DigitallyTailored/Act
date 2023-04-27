@@ -20,11 +20,11 @@ export default {
             v.act.find('span').innerText = state.count;
         })
          */
-        act.listen( 'count', state => {
+        act.watch( 'count', state => {
             v.act.find('span').innerText = state.count;
         })
 
-        act.listen( 'tester', state => {
+        act.watch( 'tester', state => {
             v.act.find('span').innerText = 'ooh';
         })
 

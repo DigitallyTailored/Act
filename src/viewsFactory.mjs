@@ -91,7 +91,7 @@ export default {
         let watches = element.querySelectorAll('act-watch');
         watches.forEach(watch => {
             const watcher = values.act._watchers[watch.dataset.act_watch_key];
-            act.listen(watcher.name, state => {
+            act.watch(watcher.name, state => {
                 watch.innerText = watcher.event(values);
             });
             watch.innerText = watcher.event(values);

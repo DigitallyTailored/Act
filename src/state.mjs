@@ -33,7 +33,7 @@ export default {
         this.listeners.forEach(listener => listener(this.state));
     },
 
-    listen(state, listener = null) {
+    watch(state, listener = null) {
         if (listener == null) {
             listener = state
             this.listeners.add(listener);

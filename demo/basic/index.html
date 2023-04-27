@@ -35,10 +35,16 @@
     )
 
 
-    act.listen(state => {
-        console.log('New state:')
+    act.watch(state => {
+        console.log('New global state:')
         console.log(state)
     })
+    act.watch('count', state => {
+        console.log('New count state:')
+        console.log(state)
+    })
+
+
 
     /*
 
