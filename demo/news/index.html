@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Example</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="../../src/bundle.js"></script>
+
+<!--add a module script -->
+<script type="module">
+    import newsList from "./newsList.mjs";
+    import newsComments from "./newsComments.mjs";
+
+    // Import the modules into the act framework
+    act.import({ newsList, newsComments });
+
+    // Set the default target element for act.render to use
+    act.target = document.getElementById("container");
+
+    // Render the news list for a specific page
+    act.render([act.view("newsList", { page: 1 })]);
+
+    // Render the news comments for a specific news item
+    //act.render([act.view("newsComments", { newsId: 12345678 })]);
+
+</script>
+</body>
+</html>

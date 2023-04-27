@@ -132,13 +132,13 @@ export default {
         //add manually set vales to view values if they exist
         if (this._views[viewName]?.values) {
             //values = {...this._views[viewName].values(values), ...values ,...{on:[]}}
+            //values = await this._views[viewName].values(values)
             values = {...this._views[viewName].values(values), ...values}
         }
 
         if (!this._views[viewName].values?.on) {
             values = {...{on: []}, ...values}
         }
-
 
 
         //add act-specific values to view values object
@@ -154,12 +154,12 @@ export default {
 
         values.act._watchers = []
         values.watch = (name, event = null) => {
-            if(event === null) {
+            if (event === null) {
                 event = name;
                 name = '*'
             }
             values.act._watchers.push({name, event})
-            return `<act-watch data-act_watch="${name}" data-act_watch_key="${values.act._watchers.length-1}"></act-watch>`
+            return `<act-watch data-act_watch="${name}" data-act_watch_key="${values.act._watchers.length - 1}"></act-watch>`
         }
 
 
@@ -191,7 +191,7 @@ export default {
         element.act.values = () => (values)
         //values.act.element = () => (element)
         values.act.element = element
-        values.act.reference = (reference) => (element.act.find('act-'+reference))
+        values.act.reference = (reference) => (element.act.find('act-' + reference))
 
 
         element.classList.add(values.act._uid)
@@ -211,10 +211,10 @@ export default {
         return 'act_uid_' + this._uid_val
     },
 
-    prepend(target, elements) {
-        this.render(target, elements, false, false)
+    prepend(elements, target) {
+        this.render(elements, target, false, false)
     },
-    append(target, elements) {
-        this.render(target, elements, false)
+    append(elements, target) {
+        this.render(elements, target, false)
     },
 }
