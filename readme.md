@@ -5,13 +5,7 @@ Act - A Simple, Lightweight JavaScript Microframework
 <img src="https://user-images.githubusercontent.com/13086157/219523286-2c28084a-6a25-41e4-ad67-d49dc66dba54.png" width="200" />
 </div>
 
-Act is a simple, lightweight microframework that aims to be the easiest and simplest framework out there without compromising on features. It is built and used entirely using vanilla JS, HTML and CSS, so there is very little overhead to learn on top of web development basics.
-
-The framework is also designed to be embedded easily into an existing project and can be used to build reusable components that can be used across multiple pages or applications.
-
-Additionally, Act's minimal setup and lightweight nature means that it can be integrated seamlessly into existing projects, without the need for a large amount of setup or configuration. This makes it an ideal choice for developers who want to add functionality to an existing site or project, without having to overhaul the entire codebase.
-
-Overall, Act is a great choice for developers who want a lightweight, easy-to-use framework that can be integrated easily into an existing project.
+Act is a lightweight microframework designed to be the simplest and easiest to use without sacrificing features. Built and utilized with vanilla JS, HTML, and CSS, it requires minimal additional learning beyond basic web development skills found in most tutorials. The framework seamlessly embeds into existing projects, allowing for the creation of reusable components that can be incorporated across multiple pages or applications.
 
 Features
 --------
