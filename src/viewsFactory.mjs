@@ -4,7 +4,7 @@ export default {
     _views: {},
     target: false,
 
-    load(modules) {
+    import(modules) {
         Object.keys(modules).forEach(moduleName => {
             this._views[moduleName] = modules[moduleName]
         })

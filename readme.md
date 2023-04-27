@@ -39,16 +39,18 @@ Act is a simple, lightweight JavaScript microframework designed to be easy to us
 
 Loading View Modules: First, load your view modules using `act.load()`. Each module should be in the format of `[name, path]`. Once all modules are loaded, you can use the `act.render()` method to display them. Here is an example:
 
-
 ```javascript
-let modules = []
-modules.push([`button`, `/demo/basic/button.mjs`])
+//import our component module
+import button from '/modules/button.mjs'
 
-act.load(modules).then(() => {
-    //modules are loaded and Act is ready to run!
-    act.target = document.getElementById('container')
-    act.render(act.view('button'))
-})
+//we further import the modules into the act framework
+act.import({button})
+
+//set our render target
+act.target = document.getElementById('container')
+
+//show a button with optional text in the render target
+act.render(act.view('button', {text: 'Hello'}))
 ```
 
 
@@ -66,7 +68,7 @@ export default {
 
 Global Methods: Here are some global methods you can use with Act:
 
--   `act.load(modules).then(callback)`: loads an array of modules to use as views. Once all modules are loaded, the callback will be run.
+-   `act.import({modules...})`: prepares an object of imported modules to use as views
 -   `act.target`: used to specify the default target element for `act.render()` to output to.
 -   `act.render([target], elements)`: optional target. Array of elements to embed from `act.view()`. Can also accept a single string or element.
 -   `act.view(name, [values])`: returns an element to be rendered. Can optionally specify default values.
@@ -97,7 +99,7 @@ export default {
 
 Module Script Methods: Each module script is given powerful helpers and direct references to themselves and their children:
 
--   `v.act.element`: returns the HTML element for the module. Can be used to attach listeners, etc.
+-   `v.act.element`: the HTML element for the module. Can be used to attach listeners, etc.
 -   `v.act.find(query)`: performs a `querySelector()` within the scope of the current module.
 -   `v.act.findAll(query)`: performs a `querySelectorAll()` within the scope of the current module.
 -   `v.act.findViews([name])`: returns all child views under the current module. You can optionally set the name to get specific types of views.

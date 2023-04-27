@@ -12,18 +12,22 @@
 
 <!--add a module script -->
 <script type="module">
+    //import our component modules
     import button from '/demo/basic/button3.mjs'
     import draw from '/demo/basic/drawOnImage.mjs'
-    //load view modules - we do it this way so the modules can be accessed globally and we can reuse the custom references
-    act.load({button, draw})
 
+    //we further import the modules into the act framework
+    act.import({button, draw})
 
+    //initialize a watchable state variable
     act.init({count: 10})
-    //sets the default target for act.render to use
+
+    //sets the default target element for act.render to use
     act.target = document.getElementById('container')
 
+    //render some modules
     act.render([
-            act.view('draw', {imageUrl: "https://placehold.co/600x400"}),
+            act.view('draw', {imageUrl: "https://picsum.photos/600/300"}),
             act.view('draw', {imageUrl: "https://picsum.photos/600/400"}),
             //act.view('button2'),
         ]
