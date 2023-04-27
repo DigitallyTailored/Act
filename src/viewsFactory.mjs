@@ -132,7 +132,11 @@ export default {
         //add manually set vales to view values if they exist
         if (this._views[viewName]?.values) {
             //values = {...this._views[viewName].values(values), ...values ,...{on:[]}}
-            values = {...{on: []}, ...this._views[viewName].values(values), ...values}
+            values = {...this._views[viewName].values(values), ...values}
+        }
+
+        if (!this._views[viewName].values?.on) {
+            values = {...{on: []}, ...values}
         }
 
 

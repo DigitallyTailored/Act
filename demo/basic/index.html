@@ -19,6 +19,7 @@
     //we further import the modules into the act framework
     act.import({button, draw})
 
+
     //initialize a watchable state variable
     act.init({count: 10})
 
@@ -29,10 +30,13 @@
     act.render([
             act.view('draw', {imageUrl: "https://picsum.photos/600/300"}),
             act.view('draw', {imageUrl: "https://picsum.photos/600/400"}),
-            //act.view('button2'),
+            act.view('button'),
+            act.view('button'),
         ]
     )
     /*
+
+
     act.render(
         act.view('clicker')
     )
