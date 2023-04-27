@@ -12,25 +12,25 @@
 
 <!--add a module script -->
 <script type="module">
-    import button from '/demo/basic/button.mjs'
-    //load view modules
-    debugger
-    let modules = []
-    modules.push([`button`, `/demo/basic/button.mjs`])
-    modules.push([`button2`, `/demo/basic/button2.mjs`])
-    modules.push([`button3`, `/demo/basic/button3.mjs`])
-    modules.push([`clicker`, `/demo/basic/clicker.mjs`])
-    modules.push([`draw`, `/demo/basic/drawOnImage.mjs`])
 
-    act.load(modules).then(() => {
-        act.init({ count: 10 })
+    //load view modules - we do it this way so the modules can be accessed globally and we can reuse the custom references
+    let imports = [
+        [`button`, `/demo/basic/button.mjs`],
+        [`button2`, `/demo/basic/button2.mjs`],
+        [`button3`, `/demo/basic/button3.mjs`],
+        [`clicker`, `/demo/basic/clicker.mjs`],
+        [`draw`, `/demo/basic/drawOnImage.mjs`]
+    ]
+
+    act.load(imports).then(() => {
+        act.init({count: 10})
         //sets the default target for act.render to use
         act.target = document.getElementById('container')
 
         act.render([
-            act.view('draw', {imageUrl:"https://placehold.co/600x400"}),
-            act.view('draw', {imageUrl:"https://picsum.photos/600/400"}),
-            //act.view('button2'),
+                act.view('draw', {imageUrl: "https://placehold.co/600x400"}),
+                act.view('draw', {imageUrl: "https://picsum.photos/600/400"}),
+                //act.view('button2'),
             ]
         )
         /*
@@ -39,22 +39,22 @@
         )
 
          */
-/*
-                act.render(
-                    [
-                        act.view('button', {
-                            body:
+        /*
+                        act.render(
+                            [
+                                act.view('button', {
+                                    body:
 
-                                `this is fine`
-                        }),
-                        `this is a string`,
-                        act.view('button', {
-                        body:
-                            `this is fine`
-                     }),
-                    ]
-                )
-*/
+                                        `this is fine`
+                                }),
+                                `this is a string`,
+                                act.view('button', {
+                                body:
+                                    `this is fine`
+                             }),
+                            ]
+                        )
+        */
 
         act.listen(state => {
             console.log('state')
